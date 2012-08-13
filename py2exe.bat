@@ -1,0 +1,1 @@
+pyuic4 setup.py py2exe -b 1

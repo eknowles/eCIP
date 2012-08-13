@@ -10,15 +10,17 @@ class Main(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self)
         self.ui=Ui_MainWindow()
         self.ui.setupUi(self)
+        
         self.quality_val = 95
         self.Large = 900
         self.Medium = 400
-        self.Small = 150
+        self.Small = 124
                 
         self.ui.lsize.setValue(int(self.Large))
         self.ui.msize.setValue(int(self.Medium))
         self.ui.ssize.setValue(int(self.Small))
         
+        self.FTargetName = "Processed"
         self.Target = ""
         self.Prefix = ""
         
@@ -27,11 +29,17 @@ class Main(QtGui.QMainWindow):
         self.ui.Target_Button.clicked.connect(self.SelectFolder)
         self.ui.Run_Button.clicked.connect(self.ProcessImages)
         
+    def AddLine(self, detail):
+        print str(detail)
+        self.ui.plainTextEdit.insertPlainText(detail + "\n")
+        
     def ProcessImages(self, target):
+        self.AddLine("Started Batch...")
         
-        if not os.path.isdir("Processed"):
-            os.mkdir("Processed")
-        
+        if not os.path.isdir(self.FTargetName):
+            self.AddLine("Creating new folder called '" + self.FTargetName + "'")
+            os.mkdir(self.FTargetName)
+            
         self.Prefix = str(self.ui.prefixedit.text())
             
         l = self.ui.lsize.value()
@@ -41,29 +49,26 @@ class Main(QtGui.QMainWindow):
         if not self.Target == "":
             print "Not Empty"
             for infile in glob.glob("*.jpg"):
-                print "+-----------------------------------------------------------------------+"
-                print "+ Converting file " + str(infile)
-                #file, ext = os.path.splitext(infile)
+                name, ext = os.path.splitext(infile)
+                self.AddLine("Converting file " + str(infile))
                 im = Image.open(infile)
-                #Resize            
-                im.resize((l,l), Image.ANTIALIAS).save(join(os.curdir, "Processed", self.Prefix + infile + "_L.jpg"), "JPEG", quality=self.quality_val)
-                print "+ Saved " + infile + "_L.jpg"
-                im.resize((m,m), Image.ANTIALIAS).save(join(os.curdir, "Processed", self.Prefix + infile + "_M.jpg"), "JPEG", quality=self.quality_val)
-                print "+ Saved " + infile + "_M.jpg"
-                im.resize((s,s), Image.ANTIALIAS).save(join(os.curdir, "Processed", self.Prefix + infile + "_S.jpg"), "JPEG", quality=self.quality_val) 
-                print "+ Saved " + infile + "_S.jpg" 
-                print " "
+                im.resize((l,l), Image.ANTIALIAS).save(join(os.curdir, "Processed", self.Prefix + "_" + name + "_L" + ext), "JPEG", quality=self.quality_val)
+                im.resize((m,m), Image.ANTIALIAS).save(join(os.curdir, "Processed", self.Prefix + "_" + name + "_M" + ext), "JPEG", quality=self.quality_val)
+                im.resize((s,s), Image.ANTIALIAS).save(join(os.curdir, "Processed", self.Prefix + "_" + name + "_S" + ext), "JPEG", quality=self.quality_val) 
             
             QtGui.QMessageBox.information(self
                     , "Done"
                     , "Everything went better than expected..."
                     , QtGui.QMessageBox.Ok)     
+            self.AddLine("Batch Complete.")
+            
         else:
             print "Empty"
             QtGui.QMessageBox.information(self
                     , "Woops"
                     , "You havn't selected a folder yet!"
                     , QtGui.QMessageBox.Ok)  
+            self.AddLine("Error: Empty Target Folder. Use the Select Folder button at the top to choose a folder to process.")
             
     def SelectFolder(self):
         fname = QtGui.QFileDialog.getExistingDirectory(self, "Select the folder containing images", 
@@ -72,7 +77,6 @@ class Main(QtGui.QMainWindow):
         | QtGui.QFileDialog.DontResolveSymlinks)
         
         self.ui.Target_LineEdit.setText(fname)
-        print fname
         self.Target = fname
         os.chdir(str(fname))
 

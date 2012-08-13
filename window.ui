@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>410</height>
+    <width>418</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -169,6 +169,20 @@
      </spacer>
     </item>
     <item>
+     <widget class="QPlainTextEdit" name="plainTextEdit">
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="plainText">
+       <string>eCommerce Image Processor v1.0
+by Edward Knowles</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="Run_Button">
       <property name="statusTip">
        <string>Click here to start the batch</string>
@@ -185,7 +199,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>312</width>
+     <width>418</width>
      <height>21</height>
     </rect>
    </property>

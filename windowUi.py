@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'window.ui'
 #
-# Created: Sun Aug 12 19:27:10 2012
-#      by: PyQt4 UI code generator 4.9
+# Created: Mon Aug 13 15:56:05 2012
+#      by: PyQt4 UI code generator 4.9.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(312, 410)
+        MainWindow.resize(418, 564)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -83,12 +83,16 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.Dimensions_Box)
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
+        self.plainTextEdit = QtGui.QPlainTextEdit(self.centralwidget)
+        self.plainTextEdit.setMinimumSize(QtCore.QSize(400, 200))
+        self.plainTextEdit.setObjectName(_fromUtf8("plainTextEdit"))
+        self.verticalLayout.addWidget(self.plainTextEdit)
         self.Run_Button = QtGui.QPushButton(self.centralwidget)
         self.Run_Button.setObjectName(_fromUtf8("Run_Button"))
         self.verticalLayout.addWidget(self.Run_Button)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 312, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 418, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -115,6 +119,8 @@ class Ui_MainWindow(object):
         self.msize.setSuffix(QtGui.QApplication.translate("MainWindow", "px", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Small", None, QtGui.QApplication.UnicodeUTF8))
         self.ssize.setSuffix(QtGui.QApplication.translate("MainWindow", "px", None, QtGui.QApplication.UnicodeUTF8))
+        self.plainTextEdit.setPlainText(QtGui.QApplication.translate("MainWindow", "eCommerce Image Processor v1.0\n"
+"by Edward Knowles", None, QtGui.QApplication.UnicodeUTF8))
         self.Run_Button.setStatusTip(QtGui.QApplication.translate("MainWindow", "Click here to start the batch", None, QtGui.QApplication.UnicodeUTF8))
         self.Run_Button.setText(QtGui.QApplication.translate("MainWindow", "Start Process", None, QtGui.QApplication.UnicodeUTF8))
 
